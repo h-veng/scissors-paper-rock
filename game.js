@@ -1,10 +1,6 @@
-// Testing getComputerChoice()
-// console.log(getComputerChoice())
-
-// Testing getPlayerChocie()
-// console.log(getPlayerChoice())
 game()
 
+// Run 5 rounds, keep track of score and show final score and appropriate message at the end
 function game() {
     let playerScore = 0;
     let computerScore = 0;
@@ -13,14 +9,17 @@ function game() {
         let playerChoice = getPlayerChoice();
         let computerChoice = getComputerChoice();
         let outcomeMessage = "";
+        // Play a round
         let outcome = playRound(playerChoice, computerChoice);
 
+        // Update score
         if (outcome === "win") {
             playerScore++;
         } else if (outcome === "lose") {
             computerScore++;
         }
 
+        // Decide on message to print
         switch (outcome) {
             case "win":
                 outcomeMessage = `You win! ${playerChoice} beats ${computerChoice}.`;
@@ -39,8 +38,9 @@ function game() {
         console.log(`The current score is player: ${playerScore}, computer: ${computerScore}`)
     }
 
+    // Print end game messages
     console.log("That's game!")
-    
+
     if (playerScore > computerScore) {
         console.log("You won the game!")
     } else if (playerScore < computerScore) {
@@ -50,6 +50,7 @@ function game() {
     }
 }
 
+// Play a round. Takes in player choice and computer choice and returns an outcome
 function playRound(playerChoice, computerChoice) {
     let outcome;
     
@@ -83,6 +84,7 @@ function playRound(playerChoice, computerChoice) {
     return outcome;
 }
 
+// Prompt player for a choice. Will loop on invalid input.
 function getPlayerChoice() {
     while (true) {
         let choice = prompt("Choose: scissors, paper, or rock");
@@ -104,16 +106,25 @@ function getPlayerChoice() {
     }
 }
 
+// Randomly generate a choice
 function getComputerChoice() {
+    // Generate an integer between 0 and 2 inclusive
     let randomNumber = Math.floor(Math.random() * 3);
-    
-    if (randomNumber === 0) {
-        return "Scissors";
+    let choice = "";
+
+    switch (randomNumber) {
+        case 0:
+            choice = "Scissors";
+            break;
+        case 1:
+            choice = "Paper";
+            break;
+        case 2:
+            choice = "Rock";
+            break;
+        default:
+            choice = "Invalid"
     }
 
-    if (randomNumber === 1) {
-        return "Paper";
-    }
-
-    return "Rock";
+    return choice;
 }
