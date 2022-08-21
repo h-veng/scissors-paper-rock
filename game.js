@@ -6,35 +6,35 @@
 
 function getPlayerChoice() {
     while (true) {
-        choice = prompt("Choose: scissors, paper, or rock")
-        choice = choice.toLowerCase()
+        let choice = prompt("Choose: scissors, paper, or rock");
+        choice = choice.toLowerCase();
     
         if (choice === "scissors") {
-            return "Scissors"
+            return "Scissors";
         }
     
         if (choice === "paper") {
-            return "Paper"
+            return "Paper";
         }
     
         if (choice === "rock") {
-            return "Rock"
+            return "Rock";
         }
 
-        alert("Please type in 'Scissors', 'Paper', or 'Rock'")
+        alert("Please type in 'Scissors', 'Paper', or 'Rock'");
     }
 }
 
 function getComputerChoice() {
-    randomNumber = Math.floor(Math.random() * 3);
+    let randomNumber = Math.floor(Math.random() * 3);
     
     if (randomNumber === 0) {
-        return "Scissors"
+        return "Scissors";
     }
 
     if (randomNumber === 1) {
-        return "Paper"
+        return "Paper";
     }
 
-    return "Rock"
+    return "Rock";
 }
