@@ -3,53 +3,85 @@
 
 // Testing getPlayerChocie()
 // console.log(getPlayerChoice())
+game()
 
-let playerChoice = getPlayerChoice();
-let computerChoice = getComputerChoice();
-let outcomeMessage = "";
-let outcome;
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
 
-if (playerChoice === "Scissors") {
-    if (computerChoice === "Scissors") {
-        outcome = "tie";
-    } else if (computerChoice === "Paper") {
-        outcome = "win";
-    } else {
-        outcome = "lose";
+    for (let i = 0; i < 5; i++) {
+        let playerChoice = getPlayerChoice();
+        let computerChoice = getComputerChoice();
+        let outcomeMessage = "";
+        let outcome = playRound(playerChoice, computerChoice);
+
+        if (outcome === "win") {
+            playerScore++;
+        } else if (outcome === "lose") {
+            computerScore++;
+        }
+
+        switch (outcome) {
+            case "win":
+                outcomeMessage = `You win! ${playerChoice} beats ${computerChoice}.`;
+                break;
+            case "lose":
+                outcomeMessage = `You lose! ${computerChoice} beats ${playerChoice}`;
+                break;
+            case "tie":
+                outcomeMessage = `It's a tie! You both chose ${playerChoice}.`;
+                break;
+            default:
+                outcomeMessage = "Invalid game.";
+        }
+
+        console.log(outcomeMessage);
+        console.log(`The current score is player: ${playerScore}, computer: ${computerScore}`)
     }
-} else if (playerChoice === "Paper") {
-    if (computerChoice === "Scissors") {
-        outcome = "lose";
-    } else if (computerChoice === "Paper") {
-        outcome = "tie";
+
+    console.log("That's game!")
+    
+    if (playerScore > computerScore) {
+        console.log("You won the game!")
+    } else if (playerScore < computerScore) {
+        console.log("You lost the game...")
     } else {
-        outcome = "win";
-    }
-} else {
-    if (computerChoice === "Scissors") {
-        outcome = "win";
-    } else if (computerChoice === "Paper") {
-        outcome = "lose";
-    } else {
-        outcome = "tie";
+        console.log("It's a tie!")
     }
 }
 
-switch (outcome) {
-    case "win":
-        outcomeMessage = `You win! ${playerChoice} beats ${computerChoice}.`;
-        break;
-    case "lose":
-        outcomeMessage = `You lose! ${computerChoice} beats ${playerChoice}`;
-        break;
-    case "tie":
-        outcomeMessage = `It's a tie! You both chose ${playerChoice}.`;
-        break;
-    default:
-        outcomeMessage = "Invalid game.";
-}
+function playRound(playerChoice, computerChoice) {
+    let outcome;
+    
+    if (playerChoice === "Scissors") {
+        if (computerChoice === "Scissors") {
+            outcome = "tie";
+        } else if (computerChoice === "Paper") {
+            outcome = "win";
+        } else {
+            outcome = "lose";
+        }
+    } else if (playerChoice === "Paper") {
+        if (computerChoice === "Scissors") {
+            outcome = "lose";
+        } else if (computerChoice === "Paper") {
+            outcome = "tie";
+        } else {
+            outcome = "win";
+        }
+    } else {
+        if (computerChoice === "Scissors") {
+            outcome = "win";
+        } else if (computerChoice === "Paper") {
+            outcome = "lose";
+        } else {
+            // should technically chuck error message somewhere around here
+            outcome = "tie";
+        }
+    }
 
-console.log(outcomeMessage);
+    return outcome;
+}
 
 function getPlayerChoice() {
     while (true) {
